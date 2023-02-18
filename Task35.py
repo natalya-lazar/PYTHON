@@ -8,7 +8,7 @@
 
 def simple_num(x):  
     for i in range(2, x):
-        if x % elem == 0:
+        if x % i == 0:
             return("NO")
         return("YES")
 n = int(input("Введите число N: "))
