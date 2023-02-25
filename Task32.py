@@ -10,4 +10,6 @@
 from random import randint
 start, stop = [int(i) for i in input("Enter range: ").split()]
 list_num = [randint(-10, 10) for i in range(randint(10, 20))]
-print(list_num, [i for i, n in enumerate(list_num) if n in range(start, stop + 1)], sep="\n")
+print(list_num)
+range_list = [i for i in range(len(list_num)) if list_num[i] >= start and list_num[i] <= stop]
+print(range_list)
