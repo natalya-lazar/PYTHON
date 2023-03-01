@@ -20,34 +20,59 @@
 # формат словаря:
 # id surname name fathers_name tel
 
-def import_contacts():
-    phonebook = dict()
+def main_import_contacts():
     with open('phonebook.txt', 'r', encoding='utf-8') as data:
         s = data.readlines()
         for i in range(len(s)):
             phonebook[i] = s[i].split()
-        print(phonebook)
+        # print(phonebook)
+
+def import_contacts(some_string):
+    finded_contacts = list()
+    for i in phonebook:
+        if some_string in phonebook[i]:
+            finded_contacts.append(phonebook[i])
+    return finded_contacts        
 
 
-def export_contacts(new_line):
+def export_contacts(new_contact):
     with open('phonebook.txt', 'a+', encoding='utf-8') as data:
         # s = ' '.join(new_line)
-        data.writelines(' '.join(new_line))
+        data.writelines(' '.join(new_contact) + '\n')
     
 
 def input_contacts():
-    new_contact = input('new contact: ').split()
-    # потом проверка ввода
-    print(new_contact)
+    new_contact = [input('surname: ')]
+    new_contact.append(input('name: '))
+    new_contact.append(input('given name: '))
+    new_contact.append(input('phone number: '))
+    
     export_contacts(new_contact)
 
-def find_contact(some_string, id):
-    con_to_find = input('input someone: ')
+def find_contact():
+    s = import_contacts(input('whadda we search?: '))
+    print(*s)
+
+def user_interface():
+    main_import_contacts()
+    print('phonebook\nwhadda want?\n1 - add contact\n2 - find contact\n3 - print whole book\nany other input - end program')
+    user_input = input('your choice: ')
+    while user_input in ('1', '2', '3'):
+        if user_input == 1:
+            input_contacts()
+        elif user_input == '2':
+            find_contact()
+        elif user_input == '3':
+            print()
+            for i in phonebook:
+                print(*phonebook[i])
+        user_input = input('\nyour choice: ')
+
+    print('bye')          
+
 
 phonebook = dict()
-
-import_contacts()
-# input_contacts()
+user_interface()
 
     
 
